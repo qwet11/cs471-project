@@ -5,13 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Calculator</title>
+    <script type="text/javascript">
+        function calculatePayment() {
+            var principal = document.getElementById("prin").value;
+            var interest = document.getElementById("int").value;
+            var years = document.getElementById("years").value;
+            alert("Principle" + principal);
+        }
+    </script>
 </head>
 <body>
     <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
     <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/student.html';" value="Student Page" />
     <h1>Payment Calculator</h1>
     <h2>Financial Information</h2>
-    <form action="/action_page.php">
+    <form onSubmit="return calculatePayment()">
         <label for="prin">Principal ($):</label>
         <input type="text" id="prin" name="prin"><br><br>
         <label for="int">Interest (%):</label>
