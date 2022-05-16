@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Officer</title>
+
+    <script type="text/javascript">
+        function openfile(file) { window.location = "file:///" + file; }
+
+        function uploadCsv() {
+            console.log("Test");
+            const fileUpload = "activeloans.csv";
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                var table = document.createElement("table");
+                var rows = e.target.result.split("\n");
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = rows[i].split(",");
+                    if (cells.length > 1) {
+                        var row = table.insertRow(-1);
+                        for (var j = 0; j < cells.length; j++) {
+                            var cell = row.insertCell(-1);
+                            cell.innerHTML = cells[j];
+                        }
+                    }
+                }
+                var divId = document.getElementById("active-loans-table");
+                divId.innerHTML = "";
+                divId.appendChild(table);
+                console.log("Done");
+            }
+            reader.readAsText(new Blob([fileUpload]));
+        }
+    </script>
+</head>
+
+<body onload="uploadCsv();">
+    <h1>Welcome to the Bank Officer Page</h1>
+
+
+    <!-- Select student dropdown-->
+    <form action="/action_page.php">
+        <label for="students">Select student:</label>
+        <select name="students" id="students">
+            <option value="default" selected></option>
+            <option value="seth">Seth</option>
+            <option value="ethan">Ethan</option>
+            <option value="steven">Steven</option>
+            <option value="william">William</option>
+        </select>
+    </form>
+    
+    <!-- Show active loan requests for selected student-->
+    <div id="active-loans">
+        <h2>Active Loan Requests</h2>
+        <div id="active-loans-table"></div>
+    </div>
+
+</body>
+
+</html>
