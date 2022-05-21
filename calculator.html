@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,10 +15,17 @@
         }
     </script>
 </head>
+
 <body>
-    <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
-    <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/student.html';" value="Student Page" />
+    <!-- Navigation Buttons -->
+    <nav>
+        <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
+        <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/student.html';"
+            value="Student Page" />
+    </nav>
+
     <h1>Payment Calculator</h1>
+    
     <h2>Financial Information</h2>
     <form onSubmit="return calculatePayment()">
         <label for="prin">Principal ($):</label>
@@ -28,6 +36,7 @@
         <input type="text" id="years" name="years"><br><br>
         <input type="submit" value="Calculate">
     </form>
-    <h3>Your Monthly Payment:</h3> 
+    <h3>Your Monthly Payment:</h3>
 </body>
+
 </html>

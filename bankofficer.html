@@ -8,10 +8,11 @@
     <title>Bank Officer</title>
 
     <script type="text/javascript">
-        function openfile(file) { window.location = "file:///" + file; }
+        function openfile(file) {
+            window.location = "file:///" + file;
+        }
 
         function uploadCsv() {
-            console.log("Test");
             const fileUpload = "activeloans.csv";
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -30,7 +31,6 @@
                 var divId = document.getElementById("active-loans-table");
                 divId.innerHTML = "";
                 divId.appendChild(table);
-                console.log("Done");
             }
             reader.readAsText(new Blob([fileUpload]));
         }
@@ -38,10 +38,14 @@
 </head>
 
 <body onload="uploadCsv();">
-    <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
-    <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/bankofficer.html';" value="Bank Officer Page" />
-    <h1>Welcome to the Bank Officer Page</h1>
+    <!-- Navigation Buttons -->
+    <nav>
+        <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
+        <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/bankofficer.html';"
+            value="Bank Officer Page" />
+    </nav>
 
+    <h1>Welcome to the Bank Officer Page</h1>
 
     <!-- Select student dropdown-->
     <form action="/action_page.php">
@@ -54,7 +58,7 @@
             <option value="william">William</option>
         </select>
     </form>
-    
+
     <!-- Show active loan requests for selected student-->
     <div id="active-loans">
         <h2>Active Loan Requests</h2>
