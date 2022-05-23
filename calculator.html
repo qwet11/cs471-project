@@ -8,10 +8,24 @@
     <title>Payment Calculator</title>
     <script type="text/javascript">
         function calculatePayment() {
-            var principal = document.getElementById("prin").value;
-            var interest = document.getElementById("int").value;
-            var years = document.getElementById("years").value;
-            alert("Principle" + principal);
+            const principal = document.getElementById("prin").value;
+            const interest = document.getElementById("int").value;
+            const years = document.getElementById("years").value;
+
+            if(principal == "" || interest == "" || years == "") {
+                document.getElementById("monthlyPayment").innerHTML = "";
+                return;
+            }
+
+            const monthlyPayment = (principal * interest * Math.pow(1 + interest, years)) / (Math.pow(1 + interest, years) - 1);
+            document.getElementById("monthlyPayment").value = monthlyPayment.toFixed(2);
+        }
+
+        function refreshInputs() {
+            document.getElementById("prin").value = "";
+            document.getElementById("int").value = "";
+            document.getElementById("years").value = "";
+            document.getElementById("monthlyPayment").value = "";
         }
     </script>
 </head>
@@ -27,7 +41,7 @@
     <h1>Payment Calculator</h1>
     
     <h2>Financial Information</h2>
-    <form onSubmit="return calculatePayment()">
+    <form onSubmit="calculatePayment(); return false">
         <label for="prin">Principal ($):</label>
         <input type="text" id="prin" name="prin"><br><br>
         <label for="int">Interest (%):</label>
@@ -35,8 +49,12 @@
         <label for="years">Number of Years:</label>
         <input type="text" id="years" name="years"><br><br>
         <input type="submit" value="Calculate">
+        <button id="refreshButton" onClick="refreshInputs()">Refresh</button>
     </form>
-    <h3>Your Monthly Payment:</h3>
+    
+    <h2>Monthly Payment</h2>
+    <label>Your Monthly Payment:</label>
+    <input type="text" id="monthlyPayment" name="monthlyPayment" readonly>
 </body>
 
 </html>
