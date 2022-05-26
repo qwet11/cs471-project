@@ -17,12 +17,34 @@
     </nav>
 
     <h1>Monthly Support Checks</h1>
-    
+
     <h2>Current Date:</h2>
-    <h2>Time until next Check:</h2>
+    <div id="current_date">
+        </p>
+        <script>
+            date = new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+        </script>
+    </div>
+    <h2>Days until next Check:</h2>
+    <div id="next_check_date">
+        </p>
+        <!--Calculates the last day of the month and subtracts it from today's date to time to next monthly check-->
+        <script>
+            dateToday = new Date();
+            lastDayOfMonth = new Date(dateToday.getFullYear(), dateToday.getMonth() + 1, 0).getDate();
+            daysUntilEndOfMonth = lastDayOfMonth - dateToday.getDate();
+            document.getElementById("next_check_date").innerHTML = daysUntilEndOfMonth;
+        </script>
+    </div>
     <h3>Check Amount:</h3>
-    <button>Skip this Month</button>
-    <button>Cancel Checks</button>
+    <p>$500</p>
+
+
+
 </body>
 
 </html>
