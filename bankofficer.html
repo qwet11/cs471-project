@@ -8,36 +8,61 @@
     <title>Bank Officer</title>
 
     <script type="text/javascript">
-        function openfile(file) {
-            window.location = "file:///" + file;
+        function readSingleFile(e) {
+            var file = e.target.files[0];
+
+            // const parts = [
+            //     new Blob(['you construct a file...'], {
+            //         type: 'text/csv'
+            //     }),
+            //     ' Same way as you do with blob',
+            //     new Uint16Array([33])
+            // ];
+
+            // const file = new File(parts, 'activeloans.csv', {
+            //     lastModified: new Date(2020, 1, 1),
+            //     type: "text/csv"
+            // });
+
+            if (!file) {
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var contents = e.target.result;
+                displayContents(contents);
+            };
+            reader.readAsText(file);
         }
 
-        function uploadCsv() {
-            const fileUpload = "activeloans.csv";
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                var table = document.createElement("table");
-                var rows = e.target.result.split("\n");
-                for (var i = 0; i < rows.length; i++) {
-                    var cells = rows[i].split(",");
-                    if (cells.length > 1) {
-                        var row = table.insertRow(-1);
-                        for (var j = 0; j < cells.length; j++) {
-                            var cell = row.insertCell(-1);
-                            cell.innerHTML = cells[j];
-                        }
+        function displayContents(contents) {
+            var element = document.getElementById('file-content');
+            var table = document.createElement("table");
+            const rows = contents.split('\n');
+            for (var i = 0; i < rows.length; i++) {
+                var cells = rows[i].split(",");
+                if (cells.length > 1) {
+                    var row = table.insertRow(-1);
+                    for (var j = 0; j < cells.length; j++) {
+                        var cell = row.insertCell(-1);
+                        cell.innerHTML = cells[j];
                     }
                 }
-                var divId = document.getElementById("active-loans-table");
-                divId.innerHTML = "";
-                divId.appendChild(table);
             }
-            reader.readAsText(new Blob([fileUpload]));
+            var divId = document.getElementById("active-loans-table");
+            divId.innerHTML = "";
+            divId.appendChild(table);
+        }
+
+        window.onload = function () {
+            var file = document.getElementById("file-input");
+            document.getElementById('file-input').addEventListener('change', readSingleFile, false);
         }
     </script>
 </head>
 
-<body onload="uploadCsv();">
+<body>
     <!-- Navigation Buttons -->
     <nav>
         <input type="button" onclick="location.href='https://qwet11.github.io/cs471-project/';" value="Home" />
@@ -47,7 +72,8 @@
 
     <h1>Welcome to the Bank Officer Page</h1>
 
-    <!-- Select student dropdown-->
+
+    <!-- Select student dropdown
     <form action="/action_page.php">
         <label for="students">Select student:</label>
         <select name="students" id="students">
@@ -57,7 +83,9 @@
             <option value="steven">Steven</option>
             <option value="william">William</option>
         </select>
-    </form>
+    </form> -->
+
+    <input type="file" id="file-input" />
 
     <!-- Show active loan requests for selected student-->
     <div id="active-loans">
