@@ -56,8 +56,30 @@
         }
 
         window.onload = function () {
-            var file = document.getElementById("file-input");
-            document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+            // var file = document.getElementById("file-input");
+            // document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+
+            document.getElementById("students").onchange = changeListener;
+
+            function changeListener() {
+                var value = this.value
+                var element = document.getElementById("active-loans-table");
+
+                if (value == "seth") {
+                    element.removeAttribute("hidden");
+                } else {
+                    element.setAttribute("hidden", "hidden");
+                }
+
+            }
+        }
+
+        function hideRow(e) {
+            console.log("Hide row");
+            var cell = e.parentNode;
+            var row = cell.parentNode;
+            row.setAttribute("hidden", "hidden");
+            
         }
     </script>
 </head>
@@ -72,25 +94,52 @@
 
     <h1>Welcome to the Bank Officer Page</h1>
 
-
-    <!-- Select student dropdown
-    <form action="/action_page.php">
+    <form action="showLoan()">
         <label for="students">Select student:</label>
         <select name="students" id="students">
             <option value="default" selected></option>
             <option value="seth">Seth</option>
-            <option value="ethan">Ethan</option>
-            <option value="steven">Steven</option>
-            <option value="william">William</option>
         </select>
-    </form> -->
+    </form>
 
-    <input type="file" id="file-input" />
+    <!-- <input type="file" id="file-input" /> -->
 
     <!-- Show active loan requests for selected student-->
-    <div id="active-loans">
-        <h2>Active Loan Requests</h2>
-        <div id="active-loans-table"></div>
+    <div id="file-content">
+        <h2>Active Loan Request</h2>
+        <table id="active-loans-table" hidden="hidden">
+            <tr>
+                <th>Loan ID</th>
+                <th>Loan Date</th>
+                <th>Loan Amount</th>
+                <th>Loan Purpose</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>10596</td>
+                <td>01/01/2020</td>
+                <td>$100000</td>
+                <td>House</td>
+                <td><button onclick="hideRow(this)">Approve</button> or <button onclick="hideRow(this)">Reject</button></td>
+            </tr>
+
+            <tr>
+                <td>24987</td>
+                <td>04/12/2019</td>
+                <td>$68000</td>
+                <td>School tuition</td>
+                <td><button onclick="hideRow(this)">Approve</button> or <button onclick="hideRow(this)">Reject</button></td>
+            </tr>
+
+            <tr>
+                <td>31749</td>
+                <td>11/24/2022</td>
+                <td>$500</td>
+                <td>Textbooks</td>
+                <td><button onclick="hideRow(this)">Approve</button> or <button onclick="hideRow(this)">Reject</button></td>
+            </tr>
+        </table>
     </div>
 
 </body>
