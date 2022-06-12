@@ -36,6 +36,7 @@
             reader.readAsText(file);
         }
 
+        // Function to be connected to the database when implemented.
         function displayContents(contents) {
             var element = document.getElementById('file-content');
             var table = document.createElement("table");
@@ -65,6 +66,7 @@
                 var value = this.value
                 var element = document.getElementById("active-loans-table");
 
+                // Set the value depending on the student chosen
                 if (value == "seth") {
                     element.removeAttribute("hidden");
                 } else {
